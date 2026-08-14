@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relentless Quality Assurance With Fixes"
+  short_description: "Does a thorough job of testing and verifying quality of code and software, and also FIXES the software!"
+policy:
+  allow_implicit_invocation: false

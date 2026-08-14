@@ -25,6 +25,8 @@ npx skills@latest add schneidenbach/skills
 | `spencer-approved-frontends` | Apply Spencer's preferred dense, neutral visual style and frontend stack defaults to web UI work. |
 | `codex-code-review` | Run an adversarial code review from any agent with Codex CLI as the external reviewer. |
 | `claude-code-review` | Run an adversarial code review from any agent with Claude Code CLI as the external reviewer. |
+| `relentless-quality-assurance` | Relentlessly test recent code changes for edge cases, security issues, and unintended behavior without fixing them. |
+| `relentless-quality-assurance-and-fixes` | Run relentless QA, then fix the bugs and critical issues it uncovers. |
 
 ## Credit
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Relentless Quality Assurance"
+  short_description: "Does a thorough job of testing and verifying quality of code and software"
+policy:
+  allow_implicit_invocation: false
