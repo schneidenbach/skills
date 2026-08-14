@@ -54,7 +54,7 @@ REASONING: <original reasoning>
 
 Re-read <file> around line <line> (20-30 lines of context). Here is my challenge:
 
-<Claude's challenge with specific evidence — describe what you saw in the file, don't paste the code>
+<Primary reviewer's challenge with specific evidence — describe what you saw in the file, don't paste the code>
 
 Based on this challenge, respond with exactly one of:
 - DEFEND: <maintain your position with additional evidence>
@@ -64,19 +64,19 @@ Based on this challenge, respond with exactly one of:
 
 ## Reversed-role challenge prompt
 
-Use when Codex found no issues and Claude is stress-testing. Point Codex back at the target — don't paste the diff.
+Use when Codex found no issues and the primary reviewer is stress-testing. Point Codex back at the target — don't paste the diff.
 
 ```
 You reviewed the changes in <repo path> (<target description>) and found no issues (NO_ISSUES_FOUND).
 
 Re-examine the changes. I believe there is a potential issue:
 
-FINDING: <Claude's finding title>
+FINDING: <primary reviewer's finding title>
 FILE: <absolute file path>
 LINE: <line>
 SEVERITY: <severity>
 EVIDENCE: <code quote>
-REASONING: <Claude's reasoning>
+REASONING: <primary reviewer's reasoning>
 
 Defend the code against this finding, or concede if it has merit.
 Respond with one of:

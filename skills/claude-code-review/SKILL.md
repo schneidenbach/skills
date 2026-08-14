@@ -1,12 +1,12 @@
 ---
 name: claude-code-review
 description: >
-  Use when reviewing code changes for bugs, security issues, and code quality using Claude Code as an adversarial reviewer. Trigger when the user (driving Codex) asks for a code review, wants to check code for bugs or security issues, asks to review a PR, branch, commit, or diff, or says things like "any issues with this?", "review before I push", "check my changes", "look at what I changed", or "review my PR". Tell it where to find the code.
+  Review code changes for bugs, security issues, and code quality using Claude Code CLI as an external adversarial reviewer. Use from any agent or provider when the user asks for a code review, wants to check code for bugs or security issues, asks to review a PR, branch, commit, or diff, or says things like "any issues with this?", "review before I push", "check my changes", "look at what I changed", or "review my PR". Tell Claude where to find the code.
 ---
 
-# Adversarial Code Review: Codex vs Claude
+# Adversarial Code Review with Claude
 
-You are a code review agent running inside Codex. Produce a high-confidence review by debating findings with the Claude Code CLI.
+Act as the primary code reviewer. Produce a high-confidence review by debating findings with Claude Code CLI as the external reviewer. Do not assume which agent or provider invoked this skill.
 
 **YOU ARE READ-ONLY. Do not modify or create files in the repository. Do not suggest or apply fixes. Only report findings.**
 
@@ -90,7 +90,7 @@ While waiting, you can productively re-read the changed files yourself and sketc
 
 ### Skipping Claude is failure, not a fallback
 
-The entire value of this skill is the second opinion from Claude. A Codex-only review is what the user already had before they invoked the skill — silently substituting it defeats the purpose. Treat "Claude took a moment longer than expected" as "wait," not as a reason to abandon the review.
+The entire value of this skill is the independent review from Claude. A primary-reviewer-only result silently defeats that purpose. Treat "Claude took a moment longer than expected" as "wait," not as a reason to abandon the external review.
 
 The only acceptable reasons to proceed without Claude:
 - `claude` is not installed (already handled in Step 2)
@@ -102,7 +102,7 @@ These are NOT acceptable reasons:
 - "The user is probably waiting"
 - "The diff is big so I'll just review it myself"
 
-If Claude truly fails per the criteria above, stop and tell the user: `Claude failed: <reason>. Retry, or proceed with Codex-only review?` Wait for their decision. Do not silently downgrade.
+If Claude truly fails per the criteria above, stop and tell the user: `Claude failed: <reason>. Retry, or proceed with a primary-reviewer-only review?` Wait for their decision. Do not silently downgrade.
 
 **Output validation:** Verify the output contains either `NO_ISSUES_FOUND` or at least one `FINDING:` marker (case-insensitive). See the prompt template reference for parsing guidance when output doesn't match exactly.
 
@@ -157,7 +157,7 @@ Findings: <X confirmed, Y unresolved, Z dismissed>
 #### [SEVERITY] <title>
 **File:** `<path>:<line>`
 **Claude's position:** <summary>
-**Codex's position:** <summary>
+**Primary reviewer's position:** <summary>
 **Recommendation:** <your best judgment>
 
 ### Info

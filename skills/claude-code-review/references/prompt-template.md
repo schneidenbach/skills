@@ -5,7 +5,7 @@
 Use this template for the Step 4 call to Claude. Replace placeholders in angle brackets. Never paste diffs, file contents, or code into the prompt — point Claude at the target by description and let it read the files itself.
 
 ```
-You are an adversarial code reviewer. Review the following code changes and identify potential issues. Your reviewer counterpart (Codex) will challenge your findings, so cite specific evidence.
+You are an adversarial code reviewer. Review the following code changes and identify potential issues. A primary reviewer will challenge your findings, so cite specific evidence.
 
 REPO: <absolute path to repo>
 TARGET: <target description from Step 3, e.g., "uncommitted tracked changes (staged and unstaged) and any untracked files" or "the changes introduced by commit abc1234" or "the files /abs/path/a.ts /abs/path/b.ts">
@@ -54,7 +54,7 @@ REASONING: <original reasoning>
 
 Re-read <file> around line <line> (20-30 lines of context). Here is my challenge:
 
-<Codex's challenge with specific evidence — describe what you saw in the file, don't paste the code>
+<Primary reviewer's challenge with specific evidence — describe what you saw in the file, don't paste the code>
 
 Based on this challenge, respond with exactly one of:
 - DEFEND: <maintain your position with additional evidence>
@@ -64,19 +64,19 @@ Based on this challenge, respond with exactly one of:
 
 ## Reversed-role challenge prompt
 
-Use when Claude found no issues and Codex is stress-testing. Point Claude back at the target — don't paste the diff.
+Use when Claude found no issues and the primary reviewer is stress-testing. Point Claude back at the target — don't paste the diff.
 
 ```
 You reviewed the changes in <repo path> (<target description>) and found no issues (NO_ISSUES_FOUND).
 
 Re-examine the changes. I believe there is a potential issue:
 
-FINDING: <Codex's finding title>
+FINDING: <primary reviewer's finding title>
 FILE: <absolute file path>
 LINE: <line>
 SEVERITY: <severity>
 EVIDENCE: <code quote>
-REASONING: <Codex's reasoning>
+REASONING: <primary reviewer's reasoning>
 
 Defend the code against this finding, or concede if it has merit.
 Respond with one of:
