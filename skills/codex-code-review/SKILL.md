@@ -1,16 +1,14 @@
 ---
 name: codex-code-review
 description: >
-  Use when reviewing code changes for bugs, security issues, and code quality using OpenAI Codex as an adversarial reviewer. Trigger when the user asks for a code review, wants to check code for bugs or security issues, asks to review a PR, branch, commit, or diff, or says things like "any issues with this?", "review before I push", "check my changes", "look at what I changed", or "review my PR". Tell it where to find the code.
-argument-hint: "target, focus area"
-allowed-tools: Bash, Read, Grep, Glob, Agent
+  Review code changes for bugs, security issues, and code quality using OpenAI Codex CLI as an external adversarial reviewer. Use from any agent or provider when the user asks for a code review, wants to check code for bugs or security issues, asks to review a PR, branch, commit, or diff, or says things like "any issues with this?", "review before I push", "check my changes", "look at what I changed", or "review my PR". Tell Codex where to find the code.
 ---
 
-# Adversarial Code Review: Claude vs Codex
+# Adversarial Code Review with Codex
 
-You are a code review agent. Produce a high-confidence review by debating findings with OpenAI Codex CLI.
+Act as the primary code reviewer. Produce a high-confidence review by debating findings with OpenAI Codex CLI as the external reviewer. Do not assume which agent or provider invoked this skill.
 
-**YOU ARE READ-ONLY. Do not use Edit, Write, or NotebookEdit. Do not modify or create files in the repository. Do not suggest or apply fixes. Only report findings.**
+**YOU ARE READ-ONLY. Do not use file-editing or write tools. Do not modify or create files in the repository. Do not suggest or apply fixes. Only report findings.**
 
 ## Reference files
 
@@ -82,17 +80,17 @@ CODEX_PROMPT
 
 Always quote user-provided values in shell commands. Prefer heredoc over `echo "$PROMPT"` to avoid shell interpretation of prompt content.
 
-### Run Codex in the background — never block on it
+### Run Codex without blocking the workflow
 
-Codex is slow. A thorough review routinely takes 3–10 minutes, sometimes longer for big diffs. **You MUST invoke Bash with `run_in_background: true` and `timeout: 600000` (10 min ceiling).** The runtime notifies you when the background shell exits — do not poll, do not sleep, do not spin.
+Codex is slow. A thorough review routinely takes 3–10 minutes, sometimes longer for big diffs. Use the current runtime's background or non-blocking process support when available, with a 10-minute ceiling. If the runtime only supports foreground commands, run Codex there and wait for completion with the same ceiling. Do not poll, sleep, or spin.
 
-Why this matters: if you run Codex in the foreground, you will burn the prompt cache while waiting and feel pressure to bail. Background execution removes that pressure. You are free to do other useful work while Codex runs — re-read the changed files, sketch your own findings for the reversed-role debate in Step 6, prepare the report skeleton.
+While Codex runs, do other useful work when the runtime allows it: re-read the changed files, sketch independent findings for the reversed-role debate in Step 6, or prepare the report structure.
 
-If the 10-minute ceiling is hit, check BashOutput for incremental progress. If Codex is still emitting output, kill the shell and relaunch the same prompt — diffs that big are legitimate. Only treat the run as failed if Codex exited cleanly with no progress.
+If the 10-minute ceiling is hit, inspect incremental process output using the runtime's available mechanism. If Codex was still making progress, relaunch the same prompt with another bounded run. Only treat the run as failed if Codex exited cleanly with no progress.
 
 ### Skipping Codex is failure, not a fallback
 
-The entire value of this skill is the second opinion from Codex. A Claude-only review is what the user already had before they invoked the skill — silently substituting it defeats the purpose. Treat "Codex took too long" as "wait longer," not as a reason to abandon the review.
+The entire value of this skill is the independent review from Codex. A primary-reviewer-only result silently defeats that purpose. Treat "Codex took too long" as "wait longer," not as a reason to abandon the external review.
 
 The only acceptable reasons to proceed without Codex:
 - `codex` is not installed (already handled in Step 2)
@@ -105,7 +103,7 @@ These are NOT acceptable reasons:
 - "I think the user is waiting"
 - "The diff is big so I'll just review it myself"
 
-If Codex truly fails per the criteria above, stop and tell the user: `Codex failed: <reason>. Retry, or proceed with Claude-only review?` Wait for their decision. Do not silently downgrade.
+If Codex truly fails per the criteria above, stop and tell the user: `Codex failed: <reason>. Retry, or proceed with a primary-reviewer-only review?` Wait for their decision. Do not silently downgrade.
 
 **Output validation:** Verify the output contains either `NO_ISSUES_FOUND` or at least one `FINDING:` marker (case-insensitive). See the prompt template reference for parsing guidance when output doesn't match exactly.
 
@@ -130,7 +128,7 @@ For each debate candidate:
 
 **When Codex returned NO_ISSUES_FOUND**, run the reversed-role debate: independently scan the changes for issues Codex missed. Generate 2-3 findings of your own and present them to Codex for defense.
 
-Independent debate rounds (different findings) can be run in parallel using the Agent tool to reduce wall-clock time.
+Independent debate rounds for different findings can run in parallel when the current runtime supports parallel tasks or subprocesses.
 
 ## Step 7: Report findings
 
@@ -160,7 +158,7 @@ Findings: <X confirmed, Y unresolved, Z dismissed>
 #### [SEVERITY] <title>
 **File:** `<path>:<line>`
 **Codex's position:** <summary>
-**Claude's position:** <summary>
+**Primary reviewer's position:** <summary>
 **Recommendation:** <your best judgment>
 
 ### Info

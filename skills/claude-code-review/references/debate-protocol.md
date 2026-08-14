@@ -4,7 +4,7 @@
 
 For each candidate finding or concern, run up to 5 rounds.
 
-### Your turn (Codex)
+### Primary reviewer's turn
 
 1. Read relevant source material (code, docs, design files) with 20-30 lines of context around the referenced location
 2. Form your own independent assessment before responding
@@ -64,7 +64,7 @@ Set a 180-second timeout on each `claude -p` call. If Claude:
 - **Returns non-zero exit code**: Log the error, skip this finding
 - **Returns empty or garbled output**: Treat as a timeout (skip and continue)
 
-If more than half of Claude calls fail in the debate loop, stop the loop and surface the failure pattern to the user: `Claude is failing repeatedly mid-debate (<N>/<M> calls failed: <last error>). Retry, or finish with Codex-only judgment on the remaining items?` Wait for their decision. Do not silently downgrade — the user invoked this skill to get a second opinion, and quietly switching to a single-reviewer report defeats that.
+If more than half of Claude calls fail in the debate loop, stop the loop and surface the failure pattern to the user: `Claude is failing repeatedly mid-debate (<N>/<M> calls failed: <last error>). Retry, or finish with primary-reviewer-only judgment on the remaining items?` Wait for their decision. Do not silently downgrade — the user invoked this skill to get an independent review, and quietly switching to a single-reviewer report defeats that.
 
 ## Cost awareness
 
