@@ -4,7 +4,7 @@ A small, central collection of reusable agent skills.
 
 I use these almost daily when doing stuff. Some of them (like the frontend one) aren't necessarily the best fits for everyone.
 
-TLDR: use `grill-me-short` and `grill-with-docs-short`, those are my favorite.
+TLDR: use `grill-me` and `grill-with-docs`, those are my favorite.
 
 ## How to install
 
@@ -18,12 +18,9 @@ npx skills@latest add schneidenbach/skills
 
 | Skill | What it is for |
 | --- | --- |
-| `grilling` | Stress-test a plan or design through a focused, one-question-at-a-time interview. |
-| `grill-me` | User-invoked shortcut that starts a full grilling session. |
-| `grill-me-short` | User-invoked shortcut that starts a condensed grilling session. |
-| `grill-with-docs` | Run a full grilling session while maintaining the domain glossary and architectural decisions. |
-| `grill-with-docs-short` | Run a condensed grilling session while maintaining the domain glossary and architectural decisions. |
-| `grilling-short` | Condensed grilling workflow used by `grill-me-short`. |
+| `grilling` | Stress-test a plan, decision, or idea by asking each dependency-ready set of questions in rounds. |
+| `grill-me` | User-invoked shortcut that starts a grilling session. |
+| `grill-with-docs` | Run a grilling session while maintaining the domain glossary and architectural decisions. |
 | `domain-modeling` | Sharpen domain terminology, maintain `CONTEXT.md`, and record durable architectural decisions. |
 | `spencer-approved-frontends` | Apply Spencer's preferred dense, neutral visual style and frontend stack defaults to web UI work. |
 | `codex-code-review` | Run an adversarial code review from any agent with Codex CLI as the external reviewer. |
@@ -34,3 +31,7 @@ npx skills@latest add schneidenbach/skills
 The grilling and domain-modeling workflows are derived from [Matt Pocock's skills collection](https://github.com/mattpocock/skills). Thanks to Matt for publishing the original work.
 
 Licensed under the [MIT License](./LICENSE).
+
+## Why copy Matt's skills?
+
+This repository is my convenient, central install source for all the skills I use, which include Matt's skills.
