@@ -14,6 +14,8 @@ Run this command in your command line of choice (uses the [`skills` CLI](https:/
 npx skills@latest add schneidenbach/skills
 ```
 
+## The skills
+
 | Skill | What it is for |
 | --- | --- |
 | `grilling` | Stress-test a plan or design through a focused, one-question-at-a-time interview. |
