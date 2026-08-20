@@ -1,7 +1,7 @@
 ---
 name: spencer-approved-frontends
 description: >
-  Spencer's house style for any web UI work on this machine. Use whenever Spencer asks for a frontend, page, screen, component, dashboard, app shell, modal, form, table, or any kind of web visual — including phrasings like "build a UI for X", "throw together a screen", "make a dashboard", "I need a quick app". Also use when starting a brand-new React project from scratch on this machine. Overrides any general "frontend-design" skill: Spencer dislikes the default shiny-AI aesthetic and wants tight, neutral, dense, system-font UIs that look like the due-diligence and security-review apps. If Spencer is editing an existing repo with a clearly different stack (e.g. Next.js with shadcn already wired up), follow that repo's conventions, but still apply Spencer's typography, density, and tone preferences from this skill.
+  Spencer's house style for UIs. DO NOT INVOKE THIS SKILL UNLESS SPECIFICALLY ASKED. Use whenever Spencer asks for a frontend, page, screen, component, dashboard, app shell, modal, form, table, or any kind of web visual — including phrasings like "build a UI for X", "throw together a screen", "make a dashboard", "I need a quick app". Also use when starting a brand-new React project from scratch on this machine. Overrides any general "frontend-design" skill: Spencer dislikes the default shiny-AI aesthetic and wants tight, neutral, dense, system-font UIs that look like the due-diligence and security-review apps. If Spencer is editing an existing repo with a clearly different stack (e.g. Next.js with shadcn already wired up), follow that repo's conventions, but still apply Spencer's typography, density, and tone preferences from this skill.
 ---
 
 # Spencer-Approved Frontends
