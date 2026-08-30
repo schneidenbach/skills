@@ -21,6 +21,9 @@ npx skills@latest add schneidenbach/skills
 | `grilling` | Stress-test a plan, decision, or idea by asking each dependency-ready set of questions in rounds. |
 | `grill-me` | User-invoked shortcut that starts a grilling session. |
 | `grill-with-docs` | Run a grilling session while maintaining the domain glossary and architectural decisions. |
+| `wayfinder` | Map work too large for one agent session as a navigable set of decision tickets. |
+| `research` | Delegate primary-source research and capture the findings in the repository. |
+| `prototype` | Build a throwaway logic or UI prototype to answer a focused design question. |
 | `domain-modeling` | Sharpen domain terminology, maintain `CONTEXT.md`, and record durable architectural decisions. |
 | `spencer-approved-frontends` | Apply Spencer's preferred dense, neutral visual style and frontend stack defaults to web UI work. |
 | `codex-code-review` | Run an adversarial code review from any agent with Codex CLI as the external reviewer. |
