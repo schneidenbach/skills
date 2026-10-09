@@ -30,6 +30,7 @@ npx skills@latest add schneidenbach/skills
 | `claude-code-review` | Run an adversarial code review from any agent with Claude Code CLI as the external reviewer. |
 | `relentless-quality-assurance` | Relentlessly test recent code changes for edge cases, security issues, and unintended behavior without fixing them. |
 | `relentless-quality-assurance-and-fixes` | Run relentless QA, then fix the bugs and critical issues it uncovers. |
+| `revu` | User-invoked (`/revu`): open a local, PR-style review window for the session's changes across repos and send the comments back to the agent (needs [revu](https://github.com/schneidenbach/revu): `brew install schneidenbach/tap/revu`). |
 
 ## Credit
 
